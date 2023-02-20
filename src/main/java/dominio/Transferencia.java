@@ -8,8 +8,8 @@ package dominio;
 import java.util.Objects;
 
 /**
- *
- * @author HP
+ * Clase de dominio transferencia donde se establecen valores de la transferencia y se recuperan los mismos.
+ * @author Daniel & David
  */
 public class Transferencia {
 
@@ -19,9 +19,19 @@ public class Transferencia {
     private Integer id_CuentaClienteDestino;
     private float saldo;
 
+    /**
+     * Constructor de la transferencia por default.
+     */
     public Transferencia() {
     }
 
+    /**
+     * Constructor de la tranferencia con el identificador de tranferencia.
+     * @param id_transferencia Identificador de la transferencia (llave primaria).
+     * @param fecha_hora Fecha y hora de cuando se hizo la transferencia.
+     * @param id_CuentaClienteOrigen Identificador de la cuenta del cliente de donde se hizo el retiro (llave foranea).
+     * @param id_CuentaClienteDestino Identificador de la cuenta del cliente a donde se reflejara el saldo a favor (llave foranea).
+     */
     public Transferencia(Integer id_transferencia, String fecha_hora, Integer id_CuentaClienteOrigen, Integer id_CuentaClienteDestino) {
         this.id_transferencia = id_transferencia;
         this.fecha_hora = fecha_hora;
@@ -29,6 +39,13 @@ public class Transferencia {
         this.id_CuentaClienteDestino = id_CuentaClienteDestino;
     }
 
+    /**
+     * Constructor de la transferencia.
+     * @param fecha_hora Fecha y hora de cuando se hizo la transferencia.
+     * @param id_CuentaClienteOrigen Identificador de la cuenta del cliente de donde se hizo el retiro (llave foranea).
+     * @param id_CuentaClienteDestino Identificador de la cuenta del cliente a donde se reflejara el saldo a favor (llave foranea).
+     * @param saldo Dinero a transferir.
+     */
     public Transferencia(String fecha_hora, Integer id_CuentaClienteOrigen, Integer id_CuentaClienteDestino, float saldo) {
         this.fecha_hora = fecha_hora;
         this.id_CuentaClienteOrigen = id_CuentaClienteOrigen;

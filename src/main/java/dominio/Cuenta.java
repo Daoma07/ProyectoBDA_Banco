@@ -9,8 +9,8 @@ package dominio;
 import java.util.Objects;
 
 /**
- *
- * @author HP
+ * Clase de dominio cuenta donde se establecen valores de la cuenta  y se recuperan los mismos.
+ * @author Daniel & David
  */
 public class Cuenta {
 
@@ -20,9 +20,20 @@ public class Cuenta {
     private String estado;
     private Integer id_cliente;
 
+    /**
+     * Constructor de la cuenta por default
+     */
     public Cuenta() {
     }
 
+    /**
+     * Constructor con identificador de la cuenta del cliente.
+     * @param numero_cuenta Numero de cuenta del cliente (llave primaria).
+     * @param fecha_apertura Fecha de la apertura de la cuenta del cliente.
+     * @param saldo Saldo total de la cuenta del cliente.
+     * @param estado Estado de la cuenta del cliente (inactivo o inactivo).
+     * @param id_cliente Identificador del dueño del cliente (llave foranea).
+     */
     public Cuenta(Integer numero_cuenta, String fecha_apertura, float saldo, String estado, Integer id_cliente) {
         this.numero_cuenta = numero_cuenta;
         this.fecha_apertura = fecha_apertura;
@@ -31,6 +42,13 @@ public class Cuenta {
         this.id_cliente = id_cliente;
     }
 
+    /**
+     * Constructor del cliente.
+     * @param fecha_apertura Fecha de la apertura de la cuenta del cliente.
+     * @param saldo Saldo total de la cuenta del cliente.
+     * @param estado Estado de la cuenta del cliente (inactivo o inactivo).
+     * @param id_cliente Identificador del dueño del cliente (llave foranea).
+     */
     public Cuenta(String fecha_apertura, float saldo, String estado, Integer id_cliente) {
         this.fecha_apertura = fecha_apertura;
         this.saldo = saldo;

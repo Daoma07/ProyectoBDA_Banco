@@ -9,8 +9,8 @@ package dominio;
 import java.util.Objects;
 
 /**
- *
- * @author HP
+ * Clase de dominio cliente donde se establecen valores del cliente y se recuperan los mismos.
+ * @author Daniel & David
  */
 public class Cliente {
 
@@ -21,21 +21,19 @@ public class Cliente {
     private String fecha_nacimineto;
     private Integer id_direccion;
     private Direccion direccion;
-    //Edad no se pone porque se calcula desde la base de datos
+    
 
     public Cliente() {
     }
 
     /**
-     *
      * Constructor para un cliente.
-     *
-     * @param id_cliente
-     * @param nombre
-     * @param apellido_paterno
-     * @param apellido_materno
-     * @param fecha_nacimineto
-     * @param id_direccion
+     * @param id_cliente Identificador del cliente (llave primaria).
+     * @param nombre Nombre del cliente.
+     * @param apellido_paterno Apellido paterno del cliente.
+     * @param apellido_materno Apellido materno del cliente.
+     * @param fecha_nacimineto Fecha de nacimiento del cliente.
+     * @param id_direccion Identificador de la direccion del cliente (llave foranea).
      */
     public Cliente(Integer id_cliente, String nombre, String apellido_paterno, String apellido_materno, String fecha_nacimineto, Integer id_direccion) {
         this.id_cliente = id_cliente;
@@ -47,17 +45,13 @@ public class Cliente {
     }
 
     /**
-     *
-     * Constructor sin id para un cliente.
-     *
-     * @param nombre
-     * @param apellido_paterno
-     * @param apellido_materno
-     * @param fecha_nacimineto
-     * @param id_direccion
+     * Constructor de el cliente.
+     * @param nombre Nombre del cliente.
+     * @param apellido_paterno Apellido paterno del cliente.
+     * @param apellido_materno Apellido materno del cliente.
+     * @param fecha_nacimineto Fecha de nacimiento del cliente.
+     * @param id_direccion Identificador de la direccion del cliente (llave foranea).
      */
-    //TODO: En el mysql tenemos pensado en implementar algunos stored procedures, por ejemplo en la edad, para que automaticamente se 
-    //este generando la edad al momoneto de ser necesitada (FRM Informacion cliente).
     public Cliente(String nombre, String apellido_paterno, String apellido_materno, String fecha_nacimineto, Integer id_direccion) {
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
@@ -66,12 +60,20 @@ public class Cliente {
         this.id_direccion = id_direccion;
     }
 
+    /**
+     * Constructor del cliente sin necesidad de una direccion.
+     * @param nombre Nombre del cliente.
+     * @param apellido_paterno Apellido paterno del cliente.
+     * @param apellido_materno Apellido materno del cliente.
+     * @param fecha_nacimineto Fecha de nacimiento del cliente.
+     */
     public Cliente(String nombre, String apellido_paterno, String apellido_materno, String fecha_nacimineto) {
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.fecha_nacimineto = fecha_nacimineto;
     }
+
 
     public Cliente(Direccion direccion) {
         this.direccion = direccion;

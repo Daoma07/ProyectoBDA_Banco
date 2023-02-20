@@ -8,8 +8,8 @@ package dominio;
 import java.util.Objects;
 
 /**
- *
- * @author HP
+ * Clase de dominio direccion donde se establecen valores de la direccion y se recuperan los mismos.
+ * @author Daniel & David
  */
 public class Direccion {
 
@@ -18,9 +18,19 @@ public class Direccion {
     private String numero;
     private String colonia;
 
+    /**
+     * Constructor de la direccion por default.
+     */
     public Direccion() {
     }
 
+    /**
+     * Constructor con identificador de la direccion
+     * @param id_direccion Identificador de la direccion del cliente (llave primaria).
+     * @param calle Nombre de la calle del cliente.
+     * @param numero Numero de casa del cliente.
+     * @param colonia Colonia de la zona de la vivienda del cliente.
+     */
     public Direccion(Integer id_direccion, String calle, String numero, String colonia) {
         this.id_direccion = id_direccion;
         this.calle = calle;
@@ -28,11 +38,18 @@ public class Direccion {
         this.colonia = colonia;
     }
 
+    /**
+     * Constructor de la direccion.
+     * @param calle Nombre de la calle del cliente.
+     * @param numero Numero de casa del cliente.
+     * @param colonia Colonia de la zona de la vivienda del cliente.
+     */
     public Direccion(String calle, String numero, String colonia) {
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
     }
+
 
     public Integer getId_direccion() {
         return id_direccion;

@@ -8,8 +8,8 @@ package dominio;
 import java.util.Objects;
 
 /**
- *
- * @author HP
+ * Clase de dominio retiro donde se establecen valores del retiro  y se recuperan los mismos.
+ * @author Daniel & David
  */
 public class Retiro {
 
@@ -19,9 +19,20 @@ public class Retiro {
     private String fecha_hora;
     private Integer numero_cuenta;
 
+    /**
+     * Constructor del retiro por default.
+     */
     public Retiro() {
     }
 
+    /**
+     * Constructor del retiro con el folio de retiro.
+     * @param folio folio del retiro (llave principal).
+     * @param contraseña contraseña del retiro (cifrada).
+     * @param estado estado del retiro (activo o inactivo).
+     * @param fecha_hora Fecha y hora del retiro en el cual se hizo el retiro.
+     * @param numero_cuenta numero de cuenta del retiro (llave foranea de cuenta).
+     */
     public Retiro(Integer folio, String contraseña, String estado, String fecha_hora, Integer numero_cuenta) {
         this.folio = folio;
         this.contraseña = contraseña;
@@ -30,6 +41,13 @@ public class Retiro {
         this.numero_cuenta = numero_cuenta;
     }
 
+    /**
+     * Constructor del retiro.
+     * @param contraseña contraseña del retiro (cifrada).
+     * @param estado estado del retiro (activo o inactivo).
+     * @param fecha_hora Fecha y hora del retiro en el cual se hizo el retiro.
+     * @param numero_cuenta numero de cuenta del retiro (llave foranea de cuenta).
+     */
     public Retiro(String contraseña, String estado, String fecha_hora, Integer numero_cuenta) {
         this.contraseña = contraseña;
         this.estado = estado;
