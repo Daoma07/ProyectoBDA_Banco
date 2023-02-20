@@ -22,7 +22,7 @@ public class Conexion {
     IConexionBD manejadorConexiones = new ConexionBD(
             "jdbc:mysql://localhost/banco_1pm",
             "root",
-            "david");
+            "daniel2002");
 
     public Cliente clienteID(int idCliente) {
         IClientesDAO clientesDAO = new ClientesDAO(manejadorConexiones);
@@ -33,12 +33,25 @@ public class Conexion {
         ITrasnferenciasDAO transferenciaDAO = new TransferenciaDAO(manejadorConexiones);
         transferenciaDAO.insertar(transferencia);
     }
+    
+    public void ingresarRetiro(Retiro retiro) throws PersistenciaException {
+        IRetiroDAO retiroDAO = new RetiroDAO(manejadorConexiones);
+        retiroDAO.insertar(retiro);
+    }
 
-    public void cuentaLista(Cliente cliente) throws PersistenciaException {
+    public void cuentaListaTransferencia(Cliente cliente) throws PersistenciaException {
         ICuentasDAO cuentasDAO = new CuentasDAO(manejadorConexiones);
         List<Cuenta> cuentas = cuentasDAO.consultarCuentas(cliente.getId_cliente());
         new GenerarTransferencia(cliente, cuentas).setVisible(true);
     }
+    
+     public void cuentaListaRetiro(Cliente cliente) throws PersistenciaException {
+        ICuentasDAO cuentasDAO = new CuentasDAO(manejadorConexiones);
+        List<Cuenta> cuentas = cuentasDAO.consultarCuentas(cliente.getId_cliente());
+        new GenerarRetirosinCuenta(cliente, cuentas).setVisible(true);
+    }
+    
+    
 
     public List<Cuenta> generarListaCuentas(Cliente cliente) throws PersistenciaException {
         ICuentasDAO cuentasDAO = new CuentasDAO(manejadorConexiones);

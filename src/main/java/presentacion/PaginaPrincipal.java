@@ -68,6 +68,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenu1.add(menuItemTransefencia);
 
         jMenuItem2.setText("Retiro sin Cuenta");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -132,11 +137,22 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private void menuItemTransefenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransefenciaActionPerformed
         try {
             // TODO add your handling code here:
-            conexion.cuentaLista(cliente);
+            conexion.cuentaListaTransferencia(cliente);
         } catch (PersistenciaException ex) {
             Logger.getLogger(PaginaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_menuItemTransefenciaActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            // TODO add your handling code here:
+            conexion.cuentaListaRetiro(cliente);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PaginaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

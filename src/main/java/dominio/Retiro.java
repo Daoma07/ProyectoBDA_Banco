@@ -18,6 +18,7 @@ public class Retiro {
     private String estado;
     private String fecha_hora;
     private Integer numero_cuenta;
+    private Float saldo;
 
     /**
      * Constructor del retiro por default.
@@ -48,12 +49,22 @@ public class Retiro {
      * @param fecha_hora Fecha y hora del retiro en el cual se hizo el retiro.
      * @param numero_cuenta numero de cuenta del retiro (llave foranea de cuenta).
      */
-    public Retiro(String contraseña, String estado, String fecha_hora, Integer numero_cuenta) {
+    public Retiro(String contraseña, String estado, String fecha_hora, Integer numero_cuenta, float saldo) {
         this.contraseña = contraseña;
         this.estado = estado;
         this.fecha_hora = fecha_hora;
         this.numero_cuenta = numero_cuenta;
+        this.saldo=saldo;
     }
+
+    public Float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Float saldo) {
+        this.saldo = saldo;
+    }
+    
 
     public Integer getFolio() {
         return folio;

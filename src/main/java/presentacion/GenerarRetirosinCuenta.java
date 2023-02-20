@@ -5,17 +5,67 @@
  */
 package presentacion;
 
+import dominio.Cuenta;
+import excepciones.PersistenciaException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import conexionesBD.Conexion;
+import dominio.Cliente;
+import dominio.Retiro;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author HP
  */
 public class GenerarRetirosinCuenta extends javax.swing.JFrame {
+    
+    Cliente cliente;
+    List<Cuenta> cuentasCliente;
+    Conexion conexion = new Conexion();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     /**
      * Creates new form GenerarRetirosinCuenta
      */
-    public GenerarRetirosinCuenta() {
+    public GenerarRetirosinCuenta(Cliente cliente, List<Cuenta> cuentasDestinatario) throws PersistenciaException {
+        this.cliente = cliente;
+        this.cuentasCliente = cuentasDestinatario;
         initComponents();
+        guardarCuentasCliente();
+    }
+    
+    public void guardarCuentasCliente() throws PersistenciaException {
+        String nombre;
+        cuentasCliente = conexion.generarListaCuentas(cliente);
+        
+        this.comboBoxClientes.removeAllItems();//limpia el combobox
+        //try por si fallara al momento de rellenar
+        try {
+
+            //Se arega un nuevo ítem al combobox
+            for (int i = 0; i < cuentasCliente.size(); i++) {
+                nombre = String.valueOf(cuentasCliente.get(i).getNumero_cuenta());
+                this.comboBoxClientes.addItem(nombre);
+            }
+            
+        } catch (Exception e) { //capta el error y lo muestra
+            JOptionPane.showMessageDialog(null, "Error al cargar ComboBox" + e);
+        }
+    }
+    
+    public void guardarRetiro() throws PersistenciaException {
+        double contraseña = 10000000 + Math.random() * 90000000;
+     
+        Retiro retiro = new Retiro(String.valueOf(contraseña), "No cobrado",dateFormat.format(new Date()), 
+                Integer.parseInt(String.valueOf(this.comboBoxClientes.getSelectedItem())),
+                Float.valueOf(this.txtMonto.getText()));
+        
+        conexion.ingresarRetiro(retiro);
     }
 
     /**
@@ -30,9 +80,10 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxClientes = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
+        btnCrear = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -49,6 +100,13 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel12.setText("Monto");
 
+        btnCrear.setText("Crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,62 +115,43 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12)
-                    .addComponent(jComboBox1, 0, 157, Short.MAX_VALUE)
+                    .addComponent(comboBoxClientes, 0, 157, Short.MAX_VALUE)
                     .addComponent(txtMonto))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCrear)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCrear))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GenerarRetirosinCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GenerarRetirosinCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GenerarRetirosinCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GenerarRetirosinCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            // TODO add your handling code here:
+            guardarRetiro();
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(GenerarRetirosinCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_btnCrearActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GenerarRetirosinCuenta().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JComboBox<String> comboBoxClientes;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JList<String> jList1;

@@ -6,6 +6,7 @@
 package interfaces;
 
 import dominio.Retiro;
+import excepciones.PersistenciaException;
 
 /**
  *
@@ -13,7 +14,7 @@ import dominio.Retiro;
  */
 public interface IRetiroDAO {
 
-    Retiro insertar(Retiro retiro);
+    void insertar(Retiro retiro) throws PersistenciaException;
 
     Retiro consultar(Integer folio);
 
