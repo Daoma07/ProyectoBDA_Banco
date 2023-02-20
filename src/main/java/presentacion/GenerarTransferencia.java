@@ -29,7 +29,7 @@ public class GenerarTransferencia extends javax.swing.JFrame {
     Cliente cliente;
     Cliente clienteDestinatario;
     List<Cuenta> cuentasDestinatario;
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     Transferencia transferenciaGuardada;
 
     public void setClienteDestinatario(Cliente clienteDestinatario) {
