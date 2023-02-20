@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import excepciones.PersistenciaException;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +33,17 @@ public class RetiroDAO implements IRetiroDAO {
     @Override
     public void insertar(Retiro retiro) throws PersistenciaException {
         String sql = "INSERT INTO retiro(contraseña, estado,fecha_hora, numero_cuenta, monto) VALUES (md5(?),?,?,?,?)";
+        String sqlTemp
+                =  "CREATE EVENT temporizador "
+                + "ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL  10 second "
+                + "DO "
+                + "BEGIN "
+                + "update retiro set estado = 'No cobrado' where folio=? "
+                + "END";
+    
         try (Connection conexion = MANEJADOR_CONEXIONES.crearConexion();
-                PreparedStatement comando = conexion.prepareStatement(sql);) {
+                PreparedStatement comando = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                PreparedStatement comandoTem = conexion.prepareCall(sqlTemp);) {
 
             comando.setString(1, retiro.getContraseña());
             comando.setString(2, retiro.getEstado());
@@ -41,10 +52,19 @@ public class RetiroDAO implements IRetiroDAO {
             comando.setFloat(5, retiro.getSaldo());
 
             comando.execute();
+            ResultSet rs = comando.getGeneratedKeys();
+
+            while (rs.next()) {
+                int claveGenerada = rs.getInt(1);
+                retiro.setFolio(claveGenerada);
+            }
+
+            comandoTem.setInt(1, retiro.getFolio());
+            comandoTem.execute();
 
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "No se pudo insertar al cliente " + ex.getMessage());
-            throw new PersistenciaException("No se pudo insertar al cliente " + ex.getMessage());
+            LOG.log(Level.SEVERE, "No se pudo insertar el retiro " + ex.getMessage());
+            throw new PersistenciaException("No se pudo insertar el retiro " + ex.getMessage());
         }
     }
 
