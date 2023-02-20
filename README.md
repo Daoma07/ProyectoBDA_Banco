@@ -1,2 +1,2 @@
-# ProyectoBDA_Banco
-Proyecto 1 de base de datos avanzadas 
+# BD_banco
+Proyecto de Base de Datos Avanzadas: Banco 
