@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package implementaciones;
-
+//Imports de otras clases o librerias.
 import dominio.Cliente;
 import excepciones.PersistenciaException;
 import interfaces.IConexionBD;
@@ -20,18 +20,30 @@ import javax.swing.JOptionPane;
 import utils.ConfiguracionPaginado;
 
 /**
- *
- * @author HP
+ * Clase que implementa la interfaz de cliente y da las instrucciones a los metodos que se crearon en la interfaz,
+ * Es el encargado de crear los comando en mysql y los manda.
+ * @author Daniel & David
  */
 public class ClientesDAO implements interfaces.IClientesDAO {
 
+    //Se crean las variables finales.
     private static final Logger LOG = Logger.getLogger(ClientesDAO.class.getName());
     private final IConexionBD MANEJADOR_CONEXIONES;
-
+    
+    /**
+     * Constructor de manejador de coneciones de la clase ConexionBD
+     * @param manejadorConexiones 
+     */
     public ClientesDAO(IConexionBD manejadorConexiones) {
         this.MANEJADOR_CONEXIONES = manejadorConexiones;
     }
 
+    /**
+     * Metodo para insertar un cliente a sql y guardarlo en el mismo
+     * @param cliente cliente a insertar
+     * @return retorna el cliente
+     * @throws PersistenciaException Errores
+     */
     @Override
     public Cliente insertar(Cliente cliente) throws PersistenciaException {
      String sql = "INSERT INTO cliente(nombres, apellido_paterno, apellido_materno, fecha_nacimiento, id_direccion) VALUES(?,?,?,?,?)";
@@ -64,6 +76,11 @@ public class ClientesDAO implements interfaces.IClientesDAO {
         }
     }
 
+    /**
+     * Cliente que actuliza la infomracion del cliente con base al id del cliente
+     * @param id_cliente id de cliente
+     * @return null
+     */
     @Override
     public Cliente actualizar(Integer id_cliente) {
 
@@ -71,6 +88,11 @@ public class ClientesDAO implements interfaces.IClientesDAO {
 
     }
 
+    /**
+     * Metodo que realiza un select para consultar la informacion del cliente.
+     * @param id_cliente id de cliente.
+     * @return retorna null o el cliente
+     */
     @Override
     public Cliente consultar(Integer id_cliente) {
         String sql = "SELECT * FROM cliente WHERE id_cliente=?";
@@ -100,6 +122,12 @@ public class ClientesDAO implements interfaces.IClientesDAO {
         }
     }
 
+    /**
+     * Metodo que consulta todas las informaciones en la base de datos y los enlista en un cuadro.
+     * @param configPaginado Numero de pagina
+     * @return retorna la lista de cliente
+     * @throws PersistenciaException Errores
+     */
     @Override
     public List<Cliente> consultarClientes(ConfiguracionPaginado configPaginado) throws PersistenciaException {
         String sql = "SELECT * FROM cliente LIMIT ? OFFSET ?";

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package implementaciones;
-
+//Imports de otras clases o librerias.
 import dominio.Cuenta;
 import excepciones.PersistenciaException;
 import interfaces.IConexionBD;
@@ -19,18 +19,29 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author HP
+ * Clase que afecta a toda la informacion de las cuenta vinculadas a los clientes.
+ * @author Daniel & David
  */
 public class CuentasDAO implements interfaces.ICuentasDAO {
 
+    //Se crean las variables finales.
     private static final Logger LOG = Logger.getLogger(ClientesDAO.class.getName());
     private final IConexionBD MANEJADOR_CONEXIONES;
 
+    /**
+     * Constructor de manejador de coneciones de la clase ConexionBD
+     * @param manejadorConexiones 
+     */
     public CuentasDAO(IConexionBD manejadorConexiones) {
         this.MANEJADOR_CONEXIONES = manejadorConexiones;
     }
 
+    /**
+     * Metodo que crea/inserta una cuenta con sus atributos.
+     * @param cuenta Cuenta
+     * @return Retorna la cuenta.
+     * @throws PersistenciaException Errores.
+     */
     @Override
     public Cuenta insertar(Cuenta cuenta) throws PersistenciaException {
         String sql = "INSERT INTO cuenta(fecha_apertura,saldo,estado,id_cliente) VALUES(?,?,?,?)";
@@ -56,16 +67,32 @@ public class CuentasDAO implements interfaces.ICuentasDAO {
         }
     }
 
+    /**
+     * Metodo que ayuda a actualizar el saldo de la cuenta con un UPDATE ede codigo de MySql.
+     * @param numero_cuenta numero de cuenta (llave primaria)
+     * @return retorna el saldo actualizado del usuario afectado.
+     */
     @Override
     public Cuenta actualizarSaldo(Cuenta numero_cuenta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que ayuda a cancelar/eliminar cuenta de un usuario asociado.
+     * @param numero_cuenta numero de cuenta (llave primaria)
+     * @return 
+     */
     @Override
     public Cuenta cancelarCuenta(Cuenta numero_cuenta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que consulta la lista de cuentas que recibe como parametro el id del cliente.
+     * @param id_cliente id del cliente (llave primaria)
+     * @return retorna la lista de cuentas.
+     * @throws PersistenciaException Errores.
+     */
     @Override
     public List<Cuenta> consultarCuentas(int id_cliente) throws PersistenciaException {
         String sql = "SELECT * FROM cuenta WHERE id_cliente=? AND estado=1";

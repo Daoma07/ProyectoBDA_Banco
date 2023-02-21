@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package implementaciones;
-
+//Imports de otras clases o librerias.
 import dominio.Transferencia;
 import excepciones.PersistenciaException;
 import interfaces.IConexionBD;
@@ -21,14 +21,23 @@ import javax.swing.JOptionPane;
  * @author deivi
  */
 public class TransferenciaDAO implements ITrasnferenciasDAO {
-
+    //Se crean las variables finales.
     private static final Logger LOG = Logger.getLogger(ClientesDAO.class.getName());
     private final IConexionBD MANEJADOR_CONEXIONES;
 
+    /**
+     * Constructor de manejador de coneciones de la clase ConexionBD
+     * @param manejadorConexiones 
+     */
     public TransferenciaDAO(IConexionBD manejadorConexiones) {
         this.MANEJADOR_CONEXIONES = manejadorConexiones;
     }
 
+    /**
+     * Metodo que crea/inserta una transferencia con sus atributos.
+     * @param transferencia transferencia
+     * @throws PersistenciaException Errores.
+     */
     public void insertar(Transferencia transferencia) throws PersistenciaException {
 
         String sql = "INSERT INTO transferencia(fecha_hora, monto, id_CuentaClienteOrigen, "
@@ -83,6 +92,11 @@ public class TransferenciaDAO implements ITrasnferenciasDAO {
 
     }
 
+    /**
+     * Metodo que consulta la informacion de la transferencia que recibe como parametro el id de transferencia (llave primaria).
+     * @param id_transferencia id de tranferencia (llave primaria).
+     * @return retorna la trasnferencia.
+     */
     @Override
     public Transferencia consultar(Integer id_transferencia) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

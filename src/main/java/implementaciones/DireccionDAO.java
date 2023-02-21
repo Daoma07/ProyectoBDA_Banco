@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package implementaciones;
-
+//Imports de otras clases o librerias.
 import dominio.Direccion;
 import interfaces.IConexionBD;
 import java.sql.Connection;
@@ -17,18 +17,28 @@ import javax.swing.JOptionPane;
 import excepciones.PersistenciaException;
 
 /**
- *
- * @author HP
+ * Clase donde se guardan,actualizan y afectan las direcciones de los clientes.
+ * @author Daniel & David
  */
 public class DireccionDAO implements interfaces.IDireccionDAO {
-
+    //Se crean las variables finales.
     private static final Logger LOG = Logger.getLogger(DireccionDAO.class.getName());
     private final IConexionBD MANEJADOR_CONEXIONES;
 
+    /**
+     * Constructor de manejador de coneciones de la clase ConexionBD
+     * @param manejadorConexiones 
+     */
     public DireccionDAO(IConexionBD manejadorConexiones) {
         this.MANEJADOR_CONEXIONES = manejadorConexiones;
     }
 
+    /**
+     * Metodo que crea/inserta una direccion con sus atributos.
+     * @param direccion direccion
+     * @return retorna la direccion
+     * @throws PersistenciaException Errores.
+     */
     @Override
     public Direccion insertar(Direccion direccion) throws PersistenciaException {
         String sql = "INSERT INTO direccion(calle, numero, colonia)VALUES(?,?,?)";
@@ -54,6 +64,13 @@ public class DireccionDAO implements interfaces.IDireccionDAO {
         }
     }
 
+    /**
+     * Metodo que ayuda a actualizar el saldo de la direccion con un UPDATE ede codigo de MySql.
+     * @param id_direccion id de direccion (llave principal).
+     * @param direccionNueva direccion nueva a actualizar
+     * @return retorna la direccion
+     * @throws PersistenciaException Errores.
+     */
     @Override
     public Direccion actualizar(Integer id_direccion, Direccion direccionNueva) throws PersistenciaException {
         Direccion direccion = null;
@@ -82,6 +99,12 @@ public class DireccionDAO implements interfaces.IDireccionDAO {
         }
     }
 
+    /**
+     * Metodo que consulta la lista de direcciones que recibe como parametro el id del direccion.
+     * @param id_direccion id de la direccion (llave principal).
+     * @return retorna la direccion
+     * @throws PersistenciaException Errores.
+     */
     @Override
     public Direccion consultar(Integer id_direccion) throws PersistenciaException {
         String sql = "SELECT * FROM direccion WHERE id_direccion=?";
