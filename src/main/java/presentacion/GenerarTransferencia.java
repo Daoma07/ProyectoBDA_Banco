@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 import conexionesBD.Conexion;
 import dominio.Cliente;
 import dominio.Transferencia;
@@ -19,12 +19,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author HP
+ * Metodo para generar una transferencia entre dos cuentas.
+ * @author Daniel & David
  */
 public class GenerarTransferencia extends javax.swing.JFrame {
 
+    //Se crea una instancia para crear la conexion.
     Conexion conexion = new Conexion();
+    //se crean los atributos de los metodos.
     List<Cuenta> cuentas;
     Cliente cliente;
     Cliente clienteDestinatario;
@@ -49,6 +51,10 @@ public class GenerarTransferencia extends javax.swing.JFrame {
     }
 
 
+    /**
+     * Metodo que ayuda a guardar las cuentas de lo cliente de donde se va a enviar el dinero.
+     * @throws PersistenciaException Errores.
+     */
     public void guardarCuentasClienteOrigen() throws PersistenciaException {
 
         String nombre;
@@ -70,6 +76,10 @@ public class GenerarTransferencia extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo que guarda las cuentas del cliente a donde se va a enviar el dinero (beneficiario).
+     * @throws PersistenciaException Errores.
+     */
     public void guardarCuentasClienteDestinatario() throws PersistenciaException {
         String nombre;
         cuentasDestinatario = conexion.generarListaCuentas(clienteDestinatario);
@@ -95,6 +105,9 @@ public class GenerarTransferencia extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo que guarda el cliente destinatario.
+     */
     public void guardarClienteDestinatario() {
         clienteDestinatario = conexion.clienteID(Integer.parseInt(this.txtiDClienteDestinatario.getText()));
 
@@ -112,6 +125,9 @@ public class GenerarTransferencia extends javax.swing.JFrame {
 //
 //    }
 
+    /**
+     * Metodo que guarda la transferncia de los clientes.
+     */
     public void guardarTransferencia() {
         Transferencia transferencia = new Transferencia(dateFormat.format(new Date()),
                 Integer.parseInt(String.valueOf(comBoxCuentasCliente.getSelectedItem())),
@@ -294,6 +310,10 @@ public class GenerarTransferencia extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton las validar la accion,
+     * @param evt evento.
+     */
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
         guardarClienteDestinatario();
         this.txtNombreClienteDistinatario.setText(clienteDestinatario.getNombre()

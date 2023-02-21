@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Daniel & David
  */
 public class Transferencia {
-
+    //Atributos
     private Integer id_transferencia;
     private String fecha_hora;
     private Integer id_CuentaClienteOrigen;
@@ -93,11 +93,19 @@ public class Transferencia {
         this.id_CuentaClienteDestino = id_CuentaClienteDestino;
     }
 
+    /**
+     * toString de la clase trasnferencia donde en un string se imprimen los datos
+     * @return String de datos
+     */
     @Override
     public String toString() {
         return "Transferencia{" + "id_transferencia=" + id_transferencia + ", fecha_hora=" + fecha_hora + ", id_CuentaClienteOrigen=" + id_CuentaClienteOrigen + ", id_CuentaClienteDestino=" + id_CuentaClienteDestino + '}';
     }
 
+    /**
+     * Se utiliza para obtener un valor entero único que representa el objeto actual.
+     * @return retorna el hash
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -105,6 +113,11 @@ public class Transferencia {
         return hash;
     }
 
+    /**
+     * Se utiliza para comparar dos objetos de esa clase en función de su contenido o estado
+     * @param obj objeto
+     * @return retorna verdadero
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

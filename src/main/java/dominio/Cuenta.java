@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Daniel & David
  */
 public class Cuenta {
-
+    //Atributos
     private Integer numero_cuenta;
     private String fecha_apertura;
     private float saldo;
@@ -96,11 +96,19 @@ public class Cuenta {
         this.id_cliente = id_cliente;
     }
 
+    /**
+     * toString de la clase cuenta donde en un string se imprimen los datos
+     * @return String de datos
+     */
     @Override
     public String toString() {
         return "Cuenta{" + "numero_cuenta=" + numero_cuenta + ", fecha_apertura=" + fecha_apertura + ", saldo=" + saldo + ", estado=" + estado + ", id_cliente=" + id_cliente + '}';
     }
 
+    /**
+     * Se utiliza para obtener un valor entero único que representa el objeto actual.
+     * @return retorna el hash
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -108,6 +116,11 @@ public class Cuenta {
         return hash;
     }
 
+    /**
+     * Se utiliza para comparar dos objetos de esa clase en función de su contenido o estado
+     * @param obj objeto
+     * @return retorna verdadero
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

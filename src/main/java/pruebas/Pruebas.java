@@ -11,8 +11,8 @@ import excepciones.PersistenciaException;
 import presentacion.MenuPrincipa;
 
 /**
- *
- * @author HP
+ * Clase Main para realizar las pruebas y clase principal
+ * @author Daniel & David
  */
 public class Pruebas {
 
@@ -23,19 +23,7 @@ public class Pruebas {
         // TODO code application logic here
         MenuPrincipa menuPrincipal = new MenuPrincipa();
         menuPrincipal.setVisible(true);
-  
-
-//        IConexionBD manejadorConexiones = new ConexionBD(
-//                "jdbc:mysql://localhost/banco_1pm",
-//                "root",
-//                "daniel2002");
-//
-//        IClientesDAO clientesDAO = new ClientesDAO(manejadorConexiones);
-//        String fecha = "2002-06-07";
-//
-//        Cliente cliente = new Cliente("Daniel", "Alameda", "Lopez", fecha, 1);
-//        
-//        Cliente clienteCreado = clientesDAO.insertar(cliente);
+ 
     }
 
 }

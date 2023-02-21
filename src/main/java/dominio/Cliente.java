@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Daniel & David
  */
 public class Cliente {
-
+    //Atributos
     private Integer id_cliente;
     private String nombre;
     private String apellido_paterno;
@@ -74,7 +74,7 @@ public class Cliente {
         this.fecha_nacimineto = fecha_nacimineto;
     }
 
-
+    
     public Cliente(Direccion direccion) {
         this.direccion = direccion;
     }
@@ -201,9 +201,8 @@ public class Cliente {
     }
 
     /**
-     * Metodo toString por default del cliente.
-     *
-     * @return retorna un String con la informacion del cliente.
+     * toString de la clase trasnferencia donde en un string se imprimen los datos
+     * @return String de datos
      */
     @Override
     public String toString() {
@@ -211,8 +210,7 @@ public class Cliente {
     }
 
     /**
-     * Metodo que recupera el hash Code asignado
-     *
+     * Se utiliza para obtener un valor entero único que representa el objeto actual.
      * @return retorna el hash
      */
     @Override
@@ -223,9 +221,9 @@ public class Cliente {
     }
 
     /**
-     *
-     * @param obj
-     * @return
+     * Se utiliza para comparar dos objetos de esa clase en función de su contenido o estado
+     * @param obj objeto
+     * @return retorna verdadero
      */
     @Override
     public boolean equals(Object obj) {

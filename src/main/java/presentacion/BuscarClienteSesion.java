@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 import conexionesBD.Conexion;
 import dominio.Cliente;
 
@@ -22,13 +22,13 @@ import javax.swing.table.TableRowSorter;
 import utils.ConfiguracionPaginado;
 
 /**
- *
- * @author HP
+ * Frame de buscar cliente sesion.
+ * @author Daniel & David
  */
 public class BuscarClienteSesion extends javax.swing.JFrame {
-
+    //Se inicializa el atributo final.
     private static final Logger LOG = Logger.getLogger(BuscarClienteSesion.class.getName());
-
+    //Se crean los atributos.
     TableRowSorter<TableModel> sorter;
     private final IClientesDAO clientesDAO;
     private ConfiguracionPaginado configPaginado;
@@ -50,6 +50,10 @@ public class BuscarClienteSesion extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Metodo para cargar la tabla del cliente con su informacion correspondiente.
+     * @throws PersistenciaException 
+     */
     private void cargarTablaClientes() throws PersistenciaException {
         try {
             List<Cliente> listaClientes = this.clientesDAO.consultarClientes(this.configPaginado);
@@ -74,6 +78,9 @@ public class BuscarClienteSesion extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Metodo que selecciona al cliente.
+     */
     public void seleccionarCliente() {
         int fila = this.tblCliente.getSelectedRow();
         idCliente = (int) this.tblCliente.getValueAt(fila, 0);
@@ -235,6 +242,9 @@ public class BuscarClienteSesion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblClienteMouseClicked
 
+    /**
+     * Metodo que ayuda a filtrar al cliente.
+     */
     public void filtrar() {
         try {
             sorter.setRowFilter(RowFilter.regexFilter(txtBuscador.getText(), 1));
@@ -243,11 +253,19 @@ public class BuscarClienteSesion extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo que ayuda a avanzar de pagina
+     * @throws PersistenciaException 
+     */
     private void avanzarPagina() throws PersistenciaException {
         this.configPaginado.avanzarPagina();
         this.cargarTablaClientes();
     }
 
+    /** 
+     * Metodo que retrocede de la pagina.
+     * @throws PersistenciaException Errores.
+     */
     private void retrocederPagina() throws PersistenciaException {
         this.configPaginado.retrocederPagina();
         this.cargarTablaClientes();

@@ -1,5 +1,5 @@
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 import conexionesBD.Conexion;
 import excepciones.PersistenciaException;
 import java.util.logging.Level;
@@ -10,8 +10,8 @@ import java.util.logging.Logger;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 /**
- *
- * @author deivi
+ * Menu Principal
+ * @author Daniel & David
  */
 public class MenuPrincipa extends javax.swing.JFrame {
 
@@ -25,6 +25,9 @@ public class MenuPrincipa extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Metodo para crear la conexion y generar las presentaciones de registro del cliente.
+     */
     public void registrar() {
         Conexion conexion = new Conexion();
 
