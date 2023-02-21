@@ -33,7 +33,7 @@ public class Conexion {
         ITrasnferenciasDAO transferenciaDAO = new TransferenciaDAO(manejadorConexiones);
         transferenciaDAO.insertar(transferencia);
     }
-    
+
     public void ingresarRetiro(Retiro retiro) throws PersistenciaException {
         IRetiroDAO retiroDAO = new RetiroDAO(manejadorConexiones);
         retiroDAO.insertar(retiro);
@@ -44,14 +44,12 @@ public class Conexion {
         List<Cuenta> cuentas = cuentasDAO.consultarCuentas(cliente.getId_cliente());
         new GenerarTransferencia(cliente, cuentas).setVisible(true);
     }
-    
-     public void cuentaListaRetiro(Cliente cliente) throws PersistenciaException {
+
+    public void cuentaListaRetiro(Cliente cliente) throws PersistenciaException {
         ICuentasDAO cuentasDAO = new CuentasDAO(manejadorConexiones);
         List<Cuenta> cuentas = cuentasDAO.consultarCuentas(cliente.getId_cliente());
         new GenerarRetirosinCuenta(cliente, cuentas).setVisible(true);
     }
-    
-    
 
     public List<Cuenta> generarListaCuentas(Cliente cliente) throws PersistenciaException {
         ICuentasDAO cuentasDAO = new CuentasDAO(manejadorConexiones);
@@ -75,6 +73,11 @@ public class Conexion {
     public void tablaCientesSesion() throws PersistenciaException {
         IClientesDAO clientesDAO = new ClientesDAO(manejadorConexiones);
         new BuscarClienteSesion(clientesDAO).setVisible(true);
+    }
+
+    public void confirmarRetiro() {
+        IRetiroDAO retiroDAO = new RetiroDAO(manejadorConexiones);
+        new RegistroRetiro(retiroDAO).setVisible(true);
     }
 
     public void generarPresentacionPaginaPrincipal(Cliente cliente) {

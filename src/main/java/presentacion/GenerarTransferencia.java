@@ -32,10 +32,7 @@ public class GenerarTransferencia extends javax.swing.JFrame {
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     Transferencia transferenciaGuardada;
 
-    public void setClienteDestinatario(Cliente clienteDestinatario) {
-        this.clienteDestinatario = clienteDestinatario;
-    }
-
+   
     /**
      * Creates new form GenerarTransferencia
      */
@@ -46,6 +43,11 @@ public class GenerarTransferencia extends javax.swing.JFrame {
 
         guardarCuentasClienteOrigen();
     }
+    
+     public void setClienteDestinatario(Cliente clienteDestinatario) {
+        this.clienteDestinatario = clienteDestinatario;
+    }
+
 
     public void guardarCuentasClienteOrigen() throws PersistenciaException {
 

@@ -15,8 +15,10 @@ import dominio.Retiro;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
@@ -28,6 +30,7 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
     List<Cuenta> cuentasCliente;
     Conexion conexion = new Conexion();
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+      Random rd = new Random();
 
     /**
      * Creates new form GenerarRetirosinCuenta
@@ -59,7 +62,7 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
     }
     
     public void guardarRetiro() throws PersistenciaException {
-        double contraseña = 10000000 + Math.random() * 90000000;
+       int contraseña =  rd.nextInt(99999999);
      
         Retiro retiro = new Retiro(String.valueOf(contraseña), "No cobrado",dateFormat.format(new Date()), 
                 Integer.parseInt(String.valueOf(this.comboBoxClientes.getSelectedItem())),

@@ -16,6 +16,8 @@ public interface IRetiroDAO {
 
     void insertar(Retiro retiro) throws PersistenciaException;
 
+    void actualizar(int folio, int contraseña) throws PersistenciaException;
+
     Retiro consultar(Integer folio);
 
 }

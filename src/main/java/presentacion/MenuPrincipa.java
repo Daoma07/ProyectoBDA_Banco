@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class MenuPrincipa extends javax.swing.JFrame {
 
     Conexion conexion = new Conexion();
+    
 
     /**
      * Creates new form MenuPrincipa
@@ -78,6 +79,11 @@ public class MenuPrincipa extends javax.swing.JFrame {
         });
 
         jButton5.setText("Retiro sin Cuenta");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +143,11 @@ public class MenuPrincipa extends javax.swing.JFrame {
             Logger.getLogger(MenuPrincipa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnIngresarSesionActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        conexion.confirmarRetiro();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

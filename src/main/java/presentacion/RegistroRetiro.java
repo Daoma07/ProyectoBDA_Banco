@@ -5,17 +5,29 @@
  */
 package presentacion;
 
+import excepciones.PersistenciaException;
+import interfaces.IRetiroDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author HP
  */
 public class RegistroRetiro extends javax.swing.JFrame {
 
+    private final IRetiroDAO retiroDAO;
+
     /**
      * Creates new form RegistroRetiro
      */
-    public RegistroRetiro() {
+    public RegistroRetiro(IRetiroDAO retiroDAO) {
+        this.retiroDAO = retiroDAO;
         initComponents();
+    }
+    
+    public void confirmarRetiro() throws PersistenciaException{
+        retiroDAO.actualizar(Integer.parseInt(this.txtFolio.getText()), Integer.parseInt(this.txtContraseña.getText()));
     }
 
     /**
@@ -55,8 +67,18 @@ public class RegistroRetiro extends javax.swing.JFrame {
         jLabel14.setText("Contraseña");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnValidar.setText("Validar");
+        btnValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,40 +124,20 @@ public class RegistroRetiro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroRetiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistroRetiro().setVisible(true);
-            }
-        });
-    }
+    private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
+        try {
+            // TODO add your handling code here:
+            confirmarRetiro();
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(RegistroRetiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnValidarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
