@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 package presentacion;
-<<<<<<< HEAD
+
 
 import excepciones.PersistenciaException;
 import interfaces.IRetiroDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-=======
+
 //Imports de todos los paquetes y librerias.
->>>>>>> 35a29362355b18926e3e499b5a5bb1ce604d8c15
+
 /**
  * Clase para realizar el registro del retiro.
  * @author Daniel & David

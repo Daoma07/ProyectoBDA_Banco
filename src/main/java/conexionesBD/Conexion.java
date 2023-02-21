@@ -23,7 +23,7 @@ public class Conexion {
     IConexionBD manejadorConexiones = new ConexionBD(
             "jdbc:mysql://localhost/banco_1pm",
             "root",
-            "david");
+            "daniel2002");
     
     /**
      * 
@@ -44,15 +44,15 @@ public class Conexion {
         ITrasnferenciasDAO transferenciaDAO = new TransferenciaDAO(manejadorConexiones);
         transferenciaDAO.insertar(transferencia);
     }
-<<<<<<< HEAD
 
-=======
+
+
     /**
      * 
      * @param retiro
      * @throws PersistenciaException 
      */
->>>>>>> 35a29362355b18926e3e499b5a5bb1ce604d8c15
+
     public void ingresarRetiro(Retiro retiro) throws PersistenciaException {
         IRetiroDAO retiroDAO = new RetiroDAO(manejadorConexiones);
         retiroDAO.insertar(retiro);
@@ -68,25 +68,24 @@ public class Conexion {
         List<Cuenta> cuentas = cuentasDAO.consultarCuentas(cliente.getId_cliente());
         new GenerarTransferencia(cliente, cuentas).setVisible(true);
     }
-<<<<<<< HEAD
 
-    public void cuentaListaRetiro(Cliente cliente) throws PersistenciaException {
-=======
-    
+
+
+
+   
     /**
      * 
      * @param cliente
      * @throws PersistenciaException 
      */
      public void cuentaListaRetiro(Cliente cliente) throws PersistenciaException {
->>>>>>> 35a29362355b18926e3e499b5a5bb1ce604d8c15
+
         ICuentasDAO cuentasDAO = new CuentasDAO(manejadorConexiones);
         List<Cuenta> cuentas = cuentasDAO.consultarCuentas(cliente.getId_cliente());
         new GenerarRetirosinCuenta(cliente, cuentas).setVisible(true);
     }
-<<<<<<< HEAD
 
-=======
+
     
     
      /**
@@ -95,7 +94,7 @@ public class Conexion {
       * @return
       * @throws PersistenciaException 
       */
->>>>>>> 35a29362355b18926e3e499b5a5bb1ce604d8c15
+
     public List<Cuenta> generarListaCuentas(Cliente cliente) throws PersistenciaException {
         ICuentasDAO cuentasDAO = new CuentasDAO(manejadorConexiones);
         List<Cuenta> cuentas = cuentasDAO.consultarCuentas(cliente.getId_cliente());
@@ -131,18 +130,18 @@ public class Conexion {
         new BuscarClienteSesion(clientesDAO).setVisible(true);
     }
 
-<<<<<<< HEAD
+
     public void confirmarRetiro() {
         IRetiroDAO retiroDAO = new RetiroDAO(manejadorConexiones);
         new RegistroRetiro(retiroDAO).setVisible(true);
     }
 
-=======
+
     /**
      * 
      * @param cliente 
      */
->>>>>>> 35a29362355b18926e3e499b5a5bb1ce604d8c15
+
     public void generarPresentacionPaginaPrincipal(Cliente cliente) {
         new PaginaPrincipal(cliente).setVisible(true);
     }

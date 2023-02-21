@@ -21,16 +21,15 @@ public interface IRetiroDAO {
      */
     void insertar(Retiro retiro) throws PersistenciaException;
 
-<<<<<<< HEAD
     void actualizar(int folio, int contraseña) throws PersistenciaException;
 
-=======
+
     /**
      * Consullta con el folio (llave principal)
      * @param folio llave principal
      * @return 
      */
->>>>>>> 35a29362355b18926e3e499b5a5bb1ce604d8c15
+
     Retiro consultar(Integer folio);
 
 }
