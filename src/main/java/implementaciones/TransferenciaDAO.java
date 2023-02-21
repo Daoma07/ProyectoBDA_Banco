@@ -4,6 +4,7 @@
  */
 package implementaciones;
 //Imports de otras clases o librerias.
+
 import dominio.Transferencia;
 import excepciones.PersistenciaException;
 import interfaces.IConexionBD;
@@ -18,16 +19,19 @@ import javax.swing.JOptionPane;
 
 /**
  * Clase que crea y consulta la informacion de transferencia.
+ *
  * @author Daniel & David
  */
 public class TransferenciaDAO implements ITrasnferenciasDAO {
+
     //Se crean las variables finales.
     private static final Logger LOG = Logger.getLogger(ClientesDAO.class.getName());
     private final IConexionBD MANEJADOR_CONEXIONES;
 
     /**
      * Constructor de manejador de coneciones de la clase ConexionBD
-     * @param manejadorConexiones 
+     *
+     * @param manejadorConexiones
      */
     public TransferenciaDAO(IConexionBD manejadorConexiones) {
         this.MANEJADOR_CONEXIONES = manejadorConexiones;
@@ -35,21 +39,28 @@ public class TransferenciaDAO implements ITrasnferenciasDAO {
 
     /**
      * Metodo que crea/inserta una transferencia con sus atributos.
+     *
      * @param transferencia transferencia
      * @throws PersistenciaException Errores.
      */
     public void insertar(Transferencia transferencia) throws PersistenciaException {
+        JOptionPane.showMessageDialog(null, transferencia.toString());
 
         String sql = "INSERT INTO transferencia(fecha_hora, monto, id_CuentaClienteOrigen, "
                 + "id_CuentaClienteDestino) VALUES(?,?,?,?)";
-        String sqlOrigen = "UPDATE cuenta SET saldo = saldo-? WHERE id_cliente=?";
-        String sqlDestino = "UPDATE cuenta SET saldo = saldo+? WHERE id_cliente=?";
+        String sqlOrigen = "UPDATE cuenta SET saldo = saldo-? WHERE numero_cuenta=?";
+        String sqlDestino = "UPDATE cuenta SET saldo = saldo+? WHERE numero_cuenta=?";
 
         try (
-                Connection conexion = MANEJADOR_CONEXIONES.crearConexion(); PreparedStatement comando = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); PreparedStatement comandoOrigen = conexion.prepareStatement(sqlOrigen); PreparedStatement comandoDestino = conexion.prepareStatement(sqlDestino);) {
+                Connection conexion = MANEJADOR_CONEXIONES.crearConexion();
+                PreparedStatement comando = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                PreparedStatement comandoOrigen = conexion.prepareStatement(sqlOrigen);
+                PreparedStatement comandoDestino = conexion.prepareStatement(sqlDestino);) {
 
             try {
+
                 conexion.setAutoCommit(false);
+
                 //Agregar datos a la transferencia
                 comando.setString(1, transferencia.getFecha_hora());
                 comando.setFloat(2, transferencia.getSaldo());
@@ -65,15 +76,16 @@ public class TransferenciaDAO implements ITrasnferenciasDAO {
                 comando.executeUpdate();
                 comandoOrigen.executeUpdate();
                 comandoDestino.executeUpdate();
-                comando.executeUpdate();
                 ResultSet rs = comando.getGeneratedKeys();
 
+                conexion.commit();
                 while (rs.next()) {
                     int claveGenerada = rs.getInt(1);
                     transferencia.setId_transferencia(claveGenerada);
                     JOptionPane.showMessageDialog(null, "Transferencia Exitosa\n"
                             + "Id: " + transferencia.getId_transferencia() + "\n"
                             + "Monto: " + transferencia.getSaldo());
+
                 }
 
             } catch (SQLException e) {
@@ -93,7 +105,9 @@ public class TransferenciaDAO implements ITrasnferenciasDAO {
     }
 
     /**
-     * Metodo que consulta la informacion de la transferencia que recibe como parametro el id de transferencia (llave primaria).
+     * Metodo que consulta la informacion de la transferencia que recibe como
+     * parametro el id de transferencia (llave primaria).
+     *
      * @param id_transferencia id de tranferencia (llave primaria).
      * @return retorna la trasnferencia.
      */

@@ -5,6 +5,7 @@
  */
 package presentacion;
 //Imports de todos los paquetes y librerias.
+
 import dominio.Cuenta;
 import excepciones.PersistenciaException;
 import java.util.List;
@@ -19,18 +20,19 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Clase de generar un retiro sin necesidad de una cuenta.
+ *
  * @author Daniel & David
  */
 public class GenerarRetirosinCuenta extends javax.swing.JFrame {
+
     //Se crean los atributos utilizados por clientes.
     Cliente cliente;
     List<Cuenta> cuentasCliente;
     Conexion conexion = new Conexion();
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-      Random rd = new Random();
+    Random rd = new Random();
 
     /**
      * Creates new form GenerarRetirosinCuenta
@@ -41,14 +43,16 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
         initComponents();
         guardarCuentasCliente();
     }
+
     /**
      * Metodo para guardar las cuuentas del cliente.
-     * @throws PersistenciaException 
+     *
+     * @throws PersistenciaException
      */
     public void guardarCuentasCliente() throws PersistenciaException {
         String nombre;
         cuentasCliente = conexion.generarListaCuentas(cliente);
-        
+
         this.comboBoxClientes.removeAllItems();//limpia el combobox
         //try por si fallara al momento de rellenar
         try {
@@ -58,23 +62,32 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
                 nombre = String.valueOf(cuentasCliente.get(i).getNumero_cuenta());
                 this.comboBoxClientes.addItem(nombre);
             }
-            
+
         } catch (Exception e) { //capta el error y lo muestra
             JOptionPane.showMessageDialog(null, "Error al cargar ComboBox" + e);
         }
     }
+
     /**
-     * Metodo que guarda el retiro del cliente siempre y crea una constrasena aleatoria con la libreria de Math.
+     * Metodo que guarda el retiro del cliente siempre y crea una constrasena
+     * aleatoria con la libreria de Math.
+     *
      * @throws PersistenciaException Errores.
      */
     public void guardarRetiro() throws PersistenciaException {
-       int contraseña =  rd.nextInt(99999999);
-     
-        Retiro retiro = new Retiro(String.valueOf(contraseña), "No cobrado",dateFormat.format(new Date()), 
-                Integer.parseInt(String.valueOf(this.comboBoxClientes.getSelectedItem())),
-                Float.valueOf(this.txtMonto.getText()));
-        
-        conexion.ingresarRetiro(retiro);
+        if (Float.valueOf(this.txtSaldo.getText()) < Float.valueOf(this.txtMonto.getText())) {
+            JOptionPane.showMessageDialog(null, "Cantidad de retiro invalida", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int contraseña = rd.nextInt(99999999);
+
+            Retiro retiro = new Retiro(String.valueOf(contraseña), "No cobrado", dateFormat.format(new Date()),
+                    Integer.parseInt(String.valueOf(this.comboBoxClientes.getSelectedItem())),
+                    Float.valueOf(this.txtMonto.getText()));
+
+            conexion.ingresarRetiro(retiro);
+
+        }
+
     }
 
     /**
@@ -215,6 +228,7 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
 
     /**
      * Boton salir de la pestana con el dispose.
+     *
      * @param evt evento
      */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
