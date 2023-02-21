@@ -8,16 +8,15 @@ package interfaces;
 import java.sql.*;
 
 /**
- *
- * @author HP
+ * Interfaz para crer la conexion.
+ * @author Daniel & David
  */
 public interface IConexionBD {
 
     /**
      * Crea una conexión y devuelve ojeto Connection
-     *
      * @return Devuelve ojeto Connection
-     * @throws SQLException
+     * @throws SQLException Error
      */
     Connection crearConexion() throws SQLException;
 }
