@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Daniel & David
  */
 public class Direccion {
-
+    //Atributos
     private Integer id_direccion;
     private String calle;
     private String numero;
@@ -83,11 +83,19 @@ public class Direccion {
         this.colonia = colonia;
     }
 
+    /**
+     * toString de la clase direccion donde en un string se imprimen los datos.
+     * @return String de datos
+     */
     @Override
     public String toString() {
         return "Direccion{" + "id_direccion=" + id_direccion + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + '}';
     }
 
+    /**
+     * Se utiliza para obtener un valor entero único que representa el objeto actual.
+     * @return retorna el hash
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -95,6 +103,11 @@ public class Direccion {
         return hash;
     }
 
+    /**
+     * Se utiliza para comparar dos objetos de esa clase en función de su contenido o estado
+     * @param obj objeto
+     * @return retorna verdadero
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

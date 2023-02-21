@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Daniel & David
  */
 public class Retiro {
-
+    //Atributos
     private Integer folio;
     private String contraseña;
     private String estado;
@@ -106,11 +106,19 @@ public class Retiro {
         this.numero_cuenta = numero_cuenta;
     }
 
+    /**
+     * toString de la clase retiro donde en un string se imprimen los datos
+     * @return String de datos
+     */
     @Override
     public String toString() {
         return "Retiro{" + "folio=" + folio + ", contrase\u00f1a=" + contraseña + ", estado=" + estado + ", fecha_hora=" + fecha_hora + ", numero_cuenta=" + numero_cuenta + '}';
     }
 
+    /**
+     * Se utiliza para obtener un valor entero único que representa el objeto actual.
+     * @return retorna el hash
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -118,6 +126,11 @@ public class Retiro {
         return hash;
     }
 
+    /**
+     * Se utiliza para comparar dos objetos de esa clase en función de su contenido o estado
+     * @param obj objeto
+     * @return retorna verdadero
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

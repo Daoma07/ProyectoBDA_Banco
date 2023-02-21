@@ -6,8 +6,8 @@
 package excepciones;
 
 /**
- *
- * @author HP
+ * 
+ * @author Daniel & David
  */
 public class PersistenciaException extends Exception{
     
