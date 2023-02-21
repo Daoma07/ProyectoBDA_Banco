@@ -44,7 +44,7 @@ public class RetiroDAO implements IRetiroDAO {
         String sql = "INSERT INTO retiro(contraseña,fecha_hora, numero_cuenta, monto) VALUES (md5(?),?,?,?)";
         String sqlTemp
                 = "CREATE EVENT temporizador "
-                + "ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL  50 second "
+                + "ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL  10 minute "
                 + "DO "
                 //       + "BEGIN "
                 + "update retiro set estado = 'No cobrado' where folio=? and monto >0 ";
