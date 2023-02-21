@@ -17,8 +17,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author deivi
+ * Clase que crea y consulta la informacion de transferencia.
+ * @author Daniel & David
  */
 public class TransferenciaDAO implements ITrasnferenciasDAO {
     //Se crean las variables finales.

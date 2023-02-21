@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 import dominio.Cliente;
 import dominio.Direccion;
 import excepciones.PersistenciaException;
@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
 import conexionesBD.Conexion;
 
 /**
- *
- * @author HP
+ * Clase para hacer el registro del cliente.
+ * @author Daniel & David
  */
 public class RegistroCliente extends javax.swing.JFrame {
 
@@ -36,11 +36,19 @@ public class RegistroCliente extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Registra el registro del cliente con la clase clientesDAO.
+     * @param clientesDAO Clase clientesDAO.
+     */
     public RegistroCliente(IClientesDAO clientesDAO) {
         this.clientesDAO = clientesDAO;
         initComponents();
     }
 
+    /**
+     * Metodo que extra los datos de la direccion
+     * @return retorna la nueva direccion con sus atributos.
+     */
     public Direccion extraerDatosDireccion() {
         String calle = this.txtCalle.getText();
         String numero = this.txtNumero.getText();
@@ -48,6 +56,11 @@ public class RegistroCliente extends javax.swing.JFrame {
         return new Direccion(calle, numero, colonia);
     }
 
+    /**
+     * Metodo para extrar los datos del cliente
+     * @param cliente Objeto de tipo cliente.
+     * @return retorna el cliente nuevo con sus atributos respectivos.
+     */
     public Cliente extraerDatosCliente(Cliente cliente) {
         String nombre = this.txtNombre.getText();
         String apellido_paterno = this.txtApellidoPaterno.getText();
@@ -59,14 +72,24 @@ public class RegistroCliente extends javax.swing.JFrame {
         return new Cliente(nombre, apellido_paterno, apellido_materno, fecha_nacimiento, id_direccion);
     }
 
+    /**
+     * Muestra el error al guardar el cliente.
+     */
     private void mostrarErrorAlGuardarCliente() {
         JOptionPane.showMessageDialog(this, "No fue posible guardar al cliente: ", "error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Muestra el errror al guardar la direccion
+     */
     private void mostrarErrorAlGuardarDireccion() {
         JOptionPane.showMessageDialog(this, "No fue posible guardar la direccion: ", "error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Metodo que guarda la direccion del cliente.
+     * @return retorna la nueva direccion del cliente cuando se inserte la direccion.
+     */
     public Cliente guardarDireccion() {
 
         try {
@@ -78,6 +101,11 @@ public class RegistroCliente extends javax.swing.JFrame {
         return null;
     }
 
+    /**
+     * Metodo para guardar el cliente.
+     * @param cliente cliente
+     * @throws PersistenciaException Errores.
+     */
     public void guardarCliente(Cliente cliente) throws PersistenciaException {
 
         Cliente clienteFrom = this.extraerDatosCliente(cliente);
@@ -279,6 +307,10 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    /**
+     * Boton cancelar operacion.
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         dispose();

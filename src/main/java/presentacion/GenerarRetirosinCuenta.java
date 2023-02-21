@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 import dominio.Cuenta;
 import excepciones.PersistenciaException;
 import java.util.List;
@@ -19,11 +19,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author HP
+ * Clase de generar un retiro sin necesidad de una cuenta.
+ * @author Daniel & David
  */
 public class GenerarRetirosinCuenta extends javax.swing.JFrame {
-    
+    //Se crean los atributos utilizados por clientes.
     Cliente cliente;
     List<Cuenta> cuentasCliente;
     Conexion conexion = new Conexion();
@@ -38,7 +38,10 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
         initComponents();
         guardarCuentasCliente();
     }
-    
+    /**
+     * Metodo para guardar las cuuentas del cliente.
+     * @throws PersistenciaException 
+     */
     public void guardarCuentasCliente() throws PersistenciaException {
         String nombre;
         cuentasCliente = conexion.generarListaCuentas(cliente);
@@ -57,7 +60,10 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al cargar ComboBox" + e);
         }
     }
-    
+    /**
+     * Metodo que guarda el retiro del cliente siempre y crea una constrasena aleatoria con la libreria de Math.
+     * @throws PersistenciaException Errores.
+     */
     public void guardarRetiro() throws PersistenciaException {
         double contraseña = 10000000 + Math.random() * 90000000;
      
@@ -204,6 +210,10 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    /**
+     * Boton salir de la pestana con el dispose.
+     * @param evt evento
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         dispose();

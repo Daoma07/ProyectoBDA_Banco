@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 import dominio.Cliente;
 import dominio.Cuenta;
 import excepciones.PersistenciaException;
@@ -16,8 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author HP
+ * Clase para hacer el registro de la cuenta.
+ * @author Daniel & David
  */
 public class RegistroCuenta extends javax.swing.JFrame {
 
@@ -45,6 +45,9 @@ public class RegistroCuenta extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que selecciona el saldo.
+     */
     public void seleccionarSaldo() {
         if (this.btnAgregarSaldo.isSelected()) {
             this.txtSaldo.setEnabled(true);
@@ -55,6 +58,10 @@ public class RegistroCuenta extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo que captura los datos de la cuenta
+     * @return retorna la nueva cuenta con los datos del cliente.
+     */
     public Cuenta caputurarDatos() {
 
         String fecha = this.txtFechaApertura.getText();
@@ -66,6 +73,10 @@ public class RegistroCuenta extends javax.swing.JFrame {
         return new Cuenta(fecha, saldo, estadoCuenta, idCliente);
     }
 
+    /**
+     * Metodo qye ayuda a guardar los datos capturados.
+     * @throws PersistenciaException Errores.
+     */
     public void guardar() throws PersistenciaException {
         Cuenta cuenta = this.caputurarDatos();
         Cuenta cuentaGuardada = this.cuentasDAO.insertar(cuenta);
@@ -206,11 +217,18 @@ public class RegistroCuenta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para agregar el saldo.
+     * @param evt 
+     */
     private void btnAgregarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarSaldoActionPerformed
         // TODO add your handling code here:
         seleccionarSaldo();
     }//GEN-LAST:event_btnAgregarSaldoActionPerformed
-
+/**
+ * Boton para guardar.
+ * @param evt 
+ */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
             // TODO add your handling code here:
@@ -220,7 +238,7 @@ public class RegistroCuenta extends javax.swing.JFrame {
             Logger.getLogger(RegistroCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    
     private void txtFechaAperturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaAperturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaAperturaActionPerformed

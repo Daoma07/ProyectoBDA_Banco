@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 /**
- *
- * @author HP
+ * Clase para realizar el registro del retiro.
+ * @author Daniel & David
  */
 public class RegistroRetiro extends javax.swing.JFrame {
 

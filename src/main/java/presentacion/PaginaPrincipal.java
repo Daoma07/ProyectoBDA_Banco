@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+//Imports de todos los paquetes y librerias.
 import dominio.Cliente;
 import conexionesBD.Conexion;
 import excepciones.PersistenciaException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
- *
- * @author HP
+ * Pagina principal del programa
+ * @author Daniel & David
  */
 public class PaginaPrincipal extends javax.swing.JFrame {
 
@@ -174,12 +174,19 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jMenu3ActionPerformed
-
+/**
+ * Motodo para cerrar la sesion del menu.
+ * @param evt evento
+ */
     private void menuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarSesionActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_menuCerrarSesionActionPerformed
 
+    /**
+     * Metodo para el item de transferencia, redireccion a la pantalla de trasnferencia.
+     * @param evt 
+     */
     private void menuItemTransefenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemTransefenciaActionPerformed
         try {
             // TODO add your handling code here:
@@ -200,6 +207,10 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    /**
+     * Metodo para seleccionar que agrega la cuenta en el menu.
+     * @param evt 
+     */
     private void menuAgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarCuentaActionPerformed
         // TODO add your handling code here:
         RegistroCuenta registroCuenta = new RegistroCuenta(conexion.generarPresentacionesRegistrarCuenta(), cliente);
