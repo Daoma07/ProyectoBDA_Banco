@@ -23,7 +23,7 @@ public class Pruebas {
         // TODO code application logic here
         MenuPrincipa menuPrincipal = new MenuPrincipa();
         menuPrincipal.setVisible(true);
-        System.out.println("");
+  
 
 //        IConexionBD manejadorConexiones = new ConexionBD(
 //                "jdbc:mysql://localhost/banco_1pm",

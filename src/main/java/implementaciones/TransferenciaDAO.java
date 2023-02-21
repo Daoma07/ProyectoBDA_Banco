@@ -37,10 +37,7 @@ public class TransferenciaDAO implements ITrasnferenciasDAO {
         String sqlDestino = "UPDATE cuenta SET saldo = saldo+? WHERE id_cliente=?";
 
         try (
-                Connection conexion = MANEJADOR_CONEXIONES.crearConexion();
-                PreparedStatement comando = conexion.prepareStatement(sql);
-                PreparedStatement comandoOrigen = conexion.prepareStatement(sqlOrigen);
-                PreparedStatement comandoDestino = conexion.prepareStatement(sqlDestino);) {
+                Connection conexion = MANEJADOR_CONEXIONES.crearConexion(); PreparedStatement comando = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); PreparedStatement comandoOrigen = conexion.prepareStatement(sqlOrigen); PreparedStatement comandoDestino = conexion.prepareStatement(sqlDestino);) {
 
             try {
                 conexion.setAutoCommit(false);
@@ -59,7 +56,16 @@ public class TransferenciaDAO implements ITrasnferenciasDAO {
                 comando.executeUpdate();
                 comandoOrigen.executeUpdate();
                 comandoDestino.executeUpdate();
-                conexion.commit();
+                comando.executeUpdate();
+                ResultSet rs = comando.getGeneratedKeys();
+
+                while (rs.next()) {
+                    int claveGenerada = rs.getInt(1);
+                    transferencia.setId_transferencia(claveGenerada);
+                    JOptionPane.showMessageDialog(null, "Transferencia Exitosa\n"
+                            + "Id: " + transferencia.getId_transferencia() + "\n"
+                            + "Monto: " + transferencia.getSaldo());
+                }
 
             } catch (SQLException e) {
                 if (conexion != null) {
