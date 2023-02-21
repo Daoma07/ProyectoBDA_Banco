@@ -85,6 +85,7 @@ public class GenerarRetirosinCuenta extends javax.swing.JFrame {
                     Float.valueOf(this.txtMonto.getText()));
 
             conexion.ingresarRetiro(retiro);
+            dispose();
 
         }
 

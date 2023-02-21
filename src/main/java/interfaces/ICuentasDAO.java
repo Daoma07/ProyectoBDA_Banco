@@ -22,7 +22,7 @@ public interface ICuentasDAO {
      * @param numero_cuenta numero de cuenta
      * @return 
      */
-    Cuenta actualizarSaldo(Cuenta numero_cuenta);
+    void actualizarSaldo(int numeroCuenta, String estado, float saldo);
 
     /**
      * Metodo de interfaz para cancelar la cuenta del cliente.
@@ -32,5 +32,6 @@ public interface ICuentasDAO {
     Cuenta cancelarCuenta(Cuenta numero_cuenta);
 
     List<Cuenta> consultarCuentas(int id_cliente) throws PersistenciaException;
+     List<Cuenta> consultarCuentasG(int id_cliente) throws PersistenciaException;
 
 }

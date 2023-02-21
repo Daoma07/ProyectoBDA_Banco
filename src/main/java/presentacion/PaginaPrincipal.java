@@ -49,7 +49,8 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuItemTransefencia = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuDatosPersonales = new javax.swing.JMenu();
+        meuEditarCuenta = new javax.swing.JMenuItem();
         menuAgregarCuenta = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menuCerrarSesion = new javax.swing.JMenuItem();
@@ -101,7 +102,15 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        menuDatosPersonales.setText("Editar");
+
+        meuEditarCuenta.setText("Editar Cuenta");
+        meuEditarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meuEditarCuentaActionPerformed(evt);
+            }
+        });
+        menuDatosPersonales.add(meuEditarCuenta);
 
         menuAgregarCuenta.setText("Agregar Cuenta");
         menuAgregarCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -109,9 +118,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 menuAgregarCuentaActionPerformed(evt);
             }
         });
-        jMenu2.add(menuAgregarCuenta);
+        menuDatosPersonales.add(menuAgregarCuenta);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuDatosPersonales);
 
         jMenu3.setText("Salir");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
@@ -215,14 +224,26 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         RegistroCuenta registroCuenta = new RegistroCuenta(conexion.generarPresentacionesRegistrarCuenta(), cliente);
             registroCuenta.setVisible(true);
+            
     }//GEN-LAST:event_menuAgregarCuentaActionPerformed
+
+    private void meuEditarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meuEditarCuentaActionPerformed
+        // TODO add your handling code here:
+         try {
+            // TODO add your handling code here:
+            AgregarSaldo agregarSaldo = new AgregarSaldo(cliente, conexion.generarListaCuentas(cliente));
+            agregarSaldo.setVisible(true);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PaginaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_meuEditarCuentaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -231,7 +252,9 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem menuAgregarCuenta;
     private javax.swing.JMenuItem menuCerrarSesion;
+    private javax.swing.JMenu menuDatosPersonales;
     private javax.swing.JMenuItem menuItemTransefencia;
+    private javax.swing.JMenuItem meuEditarCuenta;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

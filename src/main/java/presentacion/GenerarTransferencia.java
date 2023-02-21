@@ -5,11 +5,13 @@
  */
 package presentacion;
 //Imports de todos los paquetes y librerias.
+
 import conexionesBD.Conexion;
 import dominio.Cliente;
 import dominio.Transferencia;
 import dominio.Cuenta;
 import excepciones.PersistenciaException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +22,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Metodo para generar una transferencia entre dos cuentas.
+ *
  * @author Daniel & David
  */
 public class GenerarTransferencia extends javax.swing.JFrame {
@@ -34,7 +37,6 @@ public class GenerarTransferencia extends javax.swing.JFrame {
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     Transferencia transferenciaGuardada;
 
-   
     /**
      * Creates new form GenerarTransferencia
      */
@@ -45,14 +47,15 @@ public class GenerarTransferencia extends javax.swing.JFrame {
 
         guardarCuentasClienteOrigen();
     }
-    
-     public void setClienteDestinatario(Cliente clienteDestinatario) {
+
+    public void setClienteDestinatario(Cliente clienteDestinatario) {
         this.clienteDestinatario = clienteDestinatario;
     }
 
-
     /**
-     * Metodo que ayuda a guardar las cuentas de lo cliente de donde se va a enviar el dinero.
+     * Metodo que ayuda a guardar las cuentas de lo cliente de donde se va a
+     * enviar el dinero.
+     *
      * @throws PersistenciaException Errores.
      */
     public void guardarCuentasClienteOrigen() throws PersistenciaException {
@@ -77,7 +80,9 @@ public class GenerarTransferencia extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo que guarda las cuentas del cliente a donde se va a enviar el dinero (beneficiario).
+     * Metodo que guarda las cuentas del cliente a donde se va a enviar el
+     * dinero (beneficiario).
+     *
      * @throws PersistenciaException Errores.
      */
     public void guardarCuentasClienteDestinatario() throws PersistenciaException {
@@ -129,16 +134,23 @@ public class GenerarTransferencia extends javax.swing.JFrame {
      * Metodo que guarda la transferncia de los clientes.
      */
     public void guardarTransferencia() {
-        Transferencia transferencia = new Transferencia(dateFormat.format(new Date()),
-                Integer.parseInt(String.valueOf(comBoxCuentasCliente.getSelectedItem())),
-                Integer.parseInt(String.valueOf(comBoxCuentasClienteDestinatario.getSelectedItem())),
-                Float.parseFloat(this.txtMonto.getText()));
+        if (Float.valueOf(this.txtMonto.getText()) > Float.valueOf(this.txtSaldoCuenta.getText())) {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Transferencia transferencia = new Transferencia(dateFormat.format(new Date()),
+                    Integer.parseInt(String.valueOf(comBoxCuentasCliente.getSelectedItem())),
+                    Integer.parseInt(String.valueOf(comBoxCuentasClienteDestinatario.getSelectedItem())),
+                    Float.parseFloat(this.txtMonto.getText()));
 
-        try {
-            conexion.ingresarTranferencia(transferencia);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(GenerarTransferencia.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                conexion.ingresarTranferencia(transferencia);
+                dispose();
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(GenerarTransferencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
+
     }
 
     /**
@@ -312,6 +324,7 @@ public class GenerarTransferencia extends javax.swing.JFrame {
 
     /**
      * Boton las validar la accion,
+     *
      * @param evt evento.
      */
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
@@ -320,12 +333,14 @@ public class GenerarTransferencia extends javax.swing.JFrame {
                 + " " + clienteDestinatario.getApellido_paterno() + " "
                 + clienteDestinatario.getApellido_materno());
 
+  
         try {
             guardarCuentasClienteDestinatario();
-
         } catch (PersistenciaException ex) {
             Logger.getLogger(GenerarTransferencia.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+      
 
     }//GEN-LAST:event_btnValidarActionPerformed
 
@@ -337,7 +352,7 @@ public class GenerarTransferencia extends javax.swing.JFrame {
     private void btnEnvialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvialActionPerformed
 
         guardarTransferencia();
-        dispose();
+        
     }//GEN-LAST:event_btnEnvialActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
